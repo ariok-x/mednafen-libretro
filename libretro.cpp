@@ -107,10 +107,10 @@ static bool is_pal = false;
 #define MEDNAFEN_CORE_GEOMETRY_BASE_W (game->nominal_width)
 #define MEDNAFEN_CORE_GEOMETRY_BASE_H (game->nominal_height)
 #define MEDNAFEN_CORE_GEOMETRY_MAX_W 512
-#define MEDNAFEN_CORE_GEOMETRY_MAX_H 242
+#define MEDNAFEN_CORE_GEOMETRY_MAX_H 240
 #define MEDNAFEN_CORE_GEOMETRY_ASPECT_RATIO (4.0 / 3.0)
 #define FB_WIDTH 512
-#define FB_HEIGHT 242
+#define FB_HEIGHT 240
 
 #elif defined(WANT_WSWAN_EMU)
 #define MEDNAFEN_CORE_NAME_MODULE "wswan"
@@ -1594,7 +1594,12 @@ size_t retro_serialize_size(void)
    }
 
    free(st.data);
+#if defined(WANT_PCE_FAST_EMU)
+   /* add enough memory for Arcade Card games */
+   return serialize_size = st.len + 0x30000 + 0x200000;
+#else
    return serialize_size = st.len;
+#endif
 }
 
 bool retro_serialize(void *data, size_t size)
