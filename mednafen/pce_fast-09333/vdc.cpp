@@ -1340,7 +1340,7 @@ void VDC_RunFrame(EmulateSpecStruct *espec, bool IsHES)
 
   if(frame_counter == 0)
   {
-   VDS = M_vdc_VDS - 4;
+   VDS = M_vdc_VDS - 1;
    VSW = M_vdc_VSW;
    VDW = M_vdc_VDW;
    VCR = M_vdc_VCR;
