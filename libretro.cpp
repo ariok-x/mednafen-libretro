@@ -111,8 +111,8 @@ static bool is_pal = false;
 #define MEDNAFEN_CORE_GEOMETRY_ASPECT_RATIO (6.0 / 5.0)
 #define FB_WIDTH 682
 #define FB_HEIGHT 240
-static int scanline_start;
-static int scanline_end;
+static uint32_t scanline_start = 0;
+static uint32_t scanline_end = 239;
 
 #elif defined(WANT_WSWAN_EMU)
 #define MEDNAFEN_CORE_NAME_MODULE "wswan"
@@ -490,8 +490,14 @@ static void check_variables(void)
       scanline_end = atoi(var.value);
    
    // removed the redundant "Keep Aspect" option; we control the ar)
-   // make Mednafen always output square pixels.
+   // make Mednafen always output square pixels.   
    setting_pce_keepaspect = 0;
+   
+   // set scanline output to max so we can crop
+   setting_pce_fast_slstart = 0;
+   setting_pce_fast_slend = 239;
+   
+
    game->fb_width = FB_WIDTH;             //682
    game->nominal_width = FB_WIDTH / 2;    //341
    game->lcm_width = FB_WIDTH / 2;

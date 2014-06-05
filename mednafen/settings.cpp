@@ -28,6 +28,8 @@ int setting_pce_fast_adpcmvolume = 100;
 int setting_pce_fast_cdpsgvolume = 100;
 uint32_t setting_pce_fast_cdspeed = 1;
 uint32_t setting_pce_keepaspect = 1;
+uint32_t setting_pce_fast_slstart = 4;
+uint32_t setting_pce_fast_slend = 235;
 #elif defined(WANT_PSX_EMU)
 uint32_t setting_psx_multitap_port_1 = 0;
 uint32_t setting_psx_multitap_port_2 = 0;
@@ -81,9 +83,9 @@ uint64 MDFN_GetSettingUI(const char *name)
    if (!strcmp("pce_fast.ocmultiplier", name)) /* make configurable */
       return 1;
    if (!strcmp("pce_fast.slstart", name))
-      return 0;
+      return setting_pce_fast_slstart;
    if (!strcmp("pce_fast.slend", name))
-      return 239;
+      return setting_pce_fast_slend;
 #elif defined(WANT_WSWAN_EMU)
    if (!strcmp("wswan.ocmultiplier", name))
       return 1;
